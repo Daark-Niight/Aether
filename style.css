@@ -1,0 +1,84 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif; /* Set a default font */
+    background-color: #f0f0f0; /* Light background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Container for the numbers */
+#number-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Set a fixed height for the container */
+    overflow: hidden; /* Prevent overflow of numbers outside the container */
+}
+
+/* Individual number styles */
+.number-container-child {
+    font-size: 100px; /* Font size for the numbers */
+    text-align: center;
+    display: inline-block;
+    margin: 0 10px; /* Spacing between numbers */
+    position: relative; /* Position relative for the animations */
+    opacity: 1; /* Start fully visible */
+    transition: transform 1s, opacity 1s; /* Smooth transition for transform and opacity */
+}
+
+/* Animation for numbers going up */
+.animate-up {
+    animation: moveUp 1s forwards; /* Call the moveUp animation */
+}
+
+/* Animation for numbers coming down */
+.animate-down {
+    animation: moveDown 1s forwards; /* Call the moveDown animation */
+}
+
+/* Keyframes for moving up */
+@keyframes moveUp {
+    0% {
+        transform: translateY(0); /* Start at original position */
+        opacity: 1; /* Fully visible */
+    }
+    100% {
+        transform: translateY(-200px); /* Move up higher */
+        opacity: 0; /* Fade out */
+    }
+}
+
+/* Keyframes for moving down */
+@keyframes moveDown {
+    0% {
+        transform: translateY(200px); /* Start below the view */
+        opacity: 0; /* Initially invisible */
+    }
+    100% {
+        transform: translateY(0); /* Move to original position */
+        opacity: 1; /* Fully visible */
+    }
+}
+
+/* Keyframes for fading out */
+@keyframes fadeOut {
+    0% {
+        opacity: 1; /* Fully visible */
+    }
+    100% {
+        opacity: 0; /* Fade out */
+    }
+}
+
+/* Fade out class */
+.fade-out {
+    animation: fadeOut 1s forwards; /* Call the fadeOut animation */
+}
