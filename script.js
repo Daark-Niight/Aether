@@ -62,7 +62,7 @@ function animateNumbersToFinal(callback) {
 }
 
 // Iframe code
-var url = "https://aeth3r.es/games";
+var url = "https://games.aeth3r.es";
 if (url) {
     var win;
 
