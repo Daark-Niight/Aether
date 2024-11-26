@@ -1,73 +1,13 @@
-// Example final combination
-const finalCombination = ['4', '3', '7', '0', '3', '9'];
-
-// Get all number elements
-const numbers = document.querySelectorAll('.number-container-child');
-
-// Function to animate the numbers to the final combination
-function animateNumbersToFinal(callback) {
-    const animationDuration = 1000; // 1 second
-
-    numbers.forEach((number, index) => {
-        setTimeout(() => {
-            // Determine if the current index is even or odd
-            if (index % 2 === 0) {
-                // Even index: Move up, fade out, and come from below
-                number.style.transform = 'translateY(0)'; // Reset position
-                number.style.opacity = '1'; // Ensure it is visible
-
-                // Fade out first
-                number.classList.add('fade-out');
-
-                // Change the number after fading out
-                setTimeout(() => {
-                    number.textContent = finalCombination[index];
-                    number.classList.remove('fade-out');
-                    number.style.transform = 'translateY(200px)'; // Move down
-                    number.style.opacity = '0'; // Start invisible
-
-                    // Animate the new number from below
-                    setTimeout(() => {
-                        number.style.transform = 'translateY(0)'; // Move to original position
-                        number.style.opacity = '1'; // Make it visible again
-                    }, 0); // Start the upward animation immediately
-                }, animationDuration); // Delay before changing the number
-            } else {
-                // Odd index: Move down, fade out, and come from above
-                number.style.transform = 'translateY(0)'; // Reset position
-                number.style.opacity = '1'; // Ensure it is visible
-
-                // Fade out first
-                number.classList.add('fade-out');
-
-                // Change the number after fading out
-                setTimeout(() => {
-                    number.textContent = finalCombination[index];
-                    number.classList.remove('fade-out');
-                    number.style.transform = 'translateY(-200px)'; // Move up
-                    number.style.opacity = '0'; // Start invisible
-
-                    // Animate the new number from above
-                    setTimeout(() => {
-                        number.style.transform = 'translateY(0)'; // Move to original position
-                        number.style.opacity = '1'; // Make it visible again
-                    }, 0); // Start the downward animation immediately
-                }, animationDuration); // Delay before changing the number
-            }
-        }, index * (animationDuration * 2)); // Adjust the delay for each number
-    });
-
-    // Call the callback function after the last animation
-    setTimeout(callback, numbers.length * (animationDuration * 2));
-}
-
-// Iframe code
-var url = "https://games.aeth3r.es";
-if (url) {
-    var win;
+document.addEventListener("DOMContentLoaded", function() {
+    const finalCombination = ['4', '3', '7', '0', '3', '9']; // Final combination
+    const numbers = document.querySelectorAll('.number-container-child');
+    const menuContainer = document.getElementById('menu-container');
+    const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 65, 66, 13]; // Up, Up, Down, Down, Left, Right, Left, Right, A, B, Enter
+    let konamiIndex = 0;
+    let win;
 
     // Function to open the iframe
-    function openIframe() {
+    function openIframe(url) {
         if (win) {
             win.focus();
         } else {
@@ -82,31 +22,58 @@ if (url) {
             iframe.src = url;
             win.document.body.appendChild(iframe);
         }
+        // Close the original tab
+        window.close();
     }
 
-    // Konami Code detection
-    let keyCount = 0;
-    let expectedSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'a', 'b', 'Enter'];
-    let keySequence = [];
+    // Function to animate numbers to the final combination
+    function animateNumbersToFinal() {
+        const animationDuration = 1400; // 1 second
 
-    // Event listener for the key combination
-    document.addEventListener('keydown', function (event ) {
-        keySequence.push(event.key);
-        keyCount++;
+        numbers.forEach((number, index) => {
+            setTimeout(() => {
+                // Fade out the current number
+                number.classList.add('fade-out');
 
-        // Check if the current key matches the expected key at the current position
-        if (keyCount <= expectedSequence.length && event.key === expectedSequence[keyCount - 1]) {
-            // If it matches, continue checking the sequence
-            if (keyCount === expectedSequence.length) {
-                // If we reached the end of the sequence, open the iframe
-                animateNumbersToFinal(openIframe); // Trigger the animation and then open the iframe
-                keyCount = 0; // Reset for a new sequence
-                keySequence = []; // Reset the key sequence
+                // Change the number after fading out
+                setTimeout(() => {
+                    number.textContent = finalCombination[index]; // Set to final number
+                    number.classList.remove('fade-out');
+
+                    // Fade in the new number
+                    number.style.transform = 'translateY(0)';
+                    number.style.opacity = '1';
+                }, animationDuration); // Change number after fade out
+            }, index * animationDuration); // Delay for each number
+        });
+
+        // Show menu after all numbers have animated
+        setTimeout(() => {
+            menuContainer.classList.add('visible');
+            menuContainer.style.opacity = '1'; // Ensure opacity is set to 1
+            menuContainer.style.visibility = 'visible'; // Ensure it is visible
+        }, numbers.length * animationDuration); // Show menu after last number animation
+    }
+
+    // Listen for key presses to detect the Konami code
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                animateNumbersToFinal(); // Start the animation
+                konamiIndex = 0; // Reset the index
             }
         } else {
-            // If the key doesn't match the expected sequence, reset 
-            keyCount = 0;
-            keySequence = [];
+            konamiIndex = 0; // Reset if the wrong key is pressed
         }
     });
-}
+
+    // Click event for images
+    document.getElementById('proxy-image').addEventListener('click', function() {
+        openIframe('https://vast-koo-aeth3r-bcf8ad31.koyeb.app/'); // Replace with actual URL
+    });
+
+    document.getElementById('games-image').addEventListener('click', function() {
+        openIframe('https://games.aeth3r.es'); // Replace with actual URL
+    });
+});
