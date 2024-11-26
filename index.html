@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Animation</title>
+    <title>Konami Code Animation</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="number-container">
-        <div class="number-container-child" id="number1">0</div>
-        <div class="number-container-child" id="number2">0</div>
-        <div class="number-container-child" id="number3">0</div>
-        <div class="number-container-child" id="number4">0</div>
-        <div class="number-container-child" id="number5">0</div>
-        <div class="number-container-child" id="number6">0</div>
+        <div class="number-container-child">0</div>
+        <div class="number-container-child">0</div>
+        <div class="number-container-child">0</div>
+        <div class="number-container-child">0</div>
+        <div class="number-container-child">0</div>
+        <div class="number-container-child">0</div>
+    </div>
+
+    <div id="menu-container" class="hidden">
+        <div id="proxy-container" class="menu-item">
+            <img id="proxy-image" src="proxy_image.png" alt="Proxy">
+            <p>Proxy</p>
+        </div>
+        <div id="games-container" class="menu-item">
+            <img id="games-image" src="games_image.png" alt="Games">
+            <p>Games</p>
+        </div>
     </div>
 
     <script src="script.js"></script>
