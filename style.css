@@ -65,7 +65,7 @@ body {
     margin: 20px; /* Spacing between containers */
 }
 
-#proxy-image, #games-image {
+#proxy-image, #games-image, #ai-image {
     width: 150px; /* Adjust the image width as needed */
     height: 150px; /* Adjust the image height as needed */
     cursor: pointer; /* Make the images clickable */
