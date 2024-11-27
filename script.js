@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to animate numbers to the final combination
     function animateNumbersToFinal() {
-        const animationDuration = 1400; // 1 second
+        const animationDuration = 500; // 1 second
 
         numbers.forEach((number, index) => {
             setTimeout(() => {
@@ -75,5 +75,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById('games-image').addEventListener('click', function() {
         openIframe('https://games.aeth3r.es'); // Replace with actual URL
+    });
+
+    document.getElementById('ai-image').addEventListener('click', function() {
+        openIframe('https://4ef6-46-222-42-115.ngrok-free.app'); // Replace with actual URL
     });
 });
