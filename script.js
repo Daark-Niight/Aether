@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Click event for images
     document.getElementById('proxy-image').addEventListener('click', function() {
-        openIframe('https://3a0c-46-222-42-115.ngrok-free.app/'); // Replace with actual URL
+        openIframe('https://9240-46-222-42-115.ngrok-free.app/'); // Replace with actual URL
     });
 
     document.getElementById('games-image').addEventListener('click', function() {
